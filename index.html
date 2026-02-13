@@ -31,13 +31,20 @@
         section {
             scroll-snap-align: start;
             min-height: 100vh;
-            padding: 1.5rem;
+            padding: 1.5rem 1.5rem 3rem 1.5rem; /* Added more bottom padding */
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: space-between; /* Changed to space-between */
             position: relative;
             background: linear-gradient(145deg, #fff9f9 0%, #ffe9f0 100%);
             border-bottom: 1px solid rgba(255, 140, 170, 0.2);
+        }
+
+        .content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
         h1, h2 {
@@ -63,6 +70,7 @@
         .landing {
             background: linear-gradient(135deg, #ffd9e2 0%, #ffecf0 100%);
             text-align: center;
+            justify-content: center; /* Center for landing */
         }
 
         .landing p {
@@ -83,14 +91,22 @@
             border: 1px solid rgba(255, 255, 255, 0.8);
         }
 
+        .button-container {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+        }
+
         .button {
             background: #b84c6c;
             color: white;
             border: none;
             padding: 1rem 2rem;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             border-radius: 3rem;
-            margin: 1.5rem auto 0;
             display: inline-block;
             text-decoration: none;
             font-weight: 500;
@@ -99,11 +115,11 @@
             width: fit-content;
             cursor: pointer;
             transition: all 0.2s ease;
-            min-height: 48px;
-            min-width: 48px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            min-height: 52px; /* Bigger touch target */
+            min-width: 200px; /* Minimum width */
+            text-align: center;
+            margin: 0 auto;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .button:active {
@@ -115,7 +131,7 @@
             display: flex;
             flex-direction: column;
             gap: 0.8rem;
-            margin: 1rem 0;
+            margin: 0.5rem 0;
         }
 
         .card {
@@ -131,14 +147,9 @@
             min-height: 60px;
         }
 
-        .card:active {
-            transform: translateX(4px);
-            background: rgba(255, 240, 245, 0.9);
-        }
-
         .story-text {
             font-size: 1.3rem;
-            margin: 1.2rem 0;
+            margin: 1rem 0;
             padding-left: 0.5rem;
             border-left: 4px solid #ffa5b9;
         }
@@ -163,6 +174,7 @@
             box-shadow: 0 10px 30px rgba(184, 76, 108, 0.1);
             text-align: center;
             width: 100%;
+            margin: 1rem 0;
         }
 
         .hint {
@@ -181,7 +193,7 @@
             margin: 1rem 0;
             background: #fff9fb;
             text-align: center;
-            min-height: 50px;
+            min-height: 52px;
         }
 
         input:focus {
@@ -209,22 +221,11 @@
             text-align: center;
         }
 
-        .final h1 {
-            font-size: 2.5rem;
-            margin: 1rem 0;
-        }
-
         .mine-text {
             font-size: 2rem;
             font-weight: 600;
             color: #a13d5f;
             margin: 2rem 0;
-        }
-
-        .flex-center {
-            display: flex;
-            justify-content: center;
-            width: 100%;
         }
 
         .password-button {
@@ -237,7 +238,12 @@
             margin: 0.5rem auto;
             width: 100%;
             max-width: 200px;
-            min-height: 50px;
+            min-height: 52px;
+        }
+
+        /* Fix for Android touch */
+        .footer-spacer {
+            height: 10px;
         }
     </style>
 </head>
@@ -245,125 +251,141 @@
     <div class="sections" id="sections">
         <!-- SECTION 0: LANDING PAGE -->
         <section class="landing">
-            <h1>🌸 For Mechi</h1>
-            <div class="quote">
-                "She Fell First.<br>I Fell Harder."
+            <div>
+                <h1>🌸 For Mechi</h1>
+                <div class="quote">
+                    "She Fell First.<br>I Fell Harder."
+                </div>
+                <p style="margin-top: 2rem;">You saw me in a pink hoodie.<br>Decided I looked good.<br>Texted me.</p>
+                <p>And somehow…<br>I'm the one who fell harder.</p>
+                <div class="button-container">
+                    <button class="button" onclick="scrollToSection(1)">Continue, trouble.</button>
+                </div>
+                <div style="margin-top: 2rem; opacity: 0.5;">💗</div>
             </div>
-            <p style="margin-top: 2rem;">You saw me in a pink hoodie.<br>Decided I looked good.<br>Texted me.</p>
-            <p>And somehow…<br>I'm the one who fell harder.</p>
-            <div class="flex-center">
-                <button class="button" onclick="scrollToSection(1)">Continue, trouble.</button>
-            </div>
-            <div style="margin-top: 2rem; opacity: 0.5;">💗</div>
         </section>
 
         <!-- SECTION 1: Why I Like You -->
         <section>
-            <h2>Why I Like You, Mechi 💕</h2>
-            <div class="card-grid">
-                <div class="card"><span style="font-size: 1.4rem; margin-right: 0.5rem;">💗</span> I like the way you look at me. Like I'm already yours.</div>
-                <div class="card"><span style="font-size: 1.4rem; margin-right: 0.5rem;">💬</span> I like the way you yap. About nothing. About everything. And I'd still listen.</div>
-                <div class="card"><span style="font-size: 1.4rem; margin-right: 0.5rem;">👀</span> I like your eyes. They don't just look at me. They stay.</div>
-                <div class="card"><span style="font-size: 1.4rem; margin-right: 0.5rem;">✨</span> I like your confidence. The way you chose me first. Bold.</div>
-                <div class="card"><span style="font-size: 1.4rem; margin-right: 0.5rem;">📝</span> You remember small details. Things I forget I said. But you don't.</div>
-                <div class="card"><span style="font-size: 1.4rem; margin-right: 0.5rem;">🫠</span> You act tough. But you melt. And I love that I get to see that side.</div>
-                <div class="card"><span style="font-size: 1.4rem; margin-right: 0.5rem;">😏</span> You try to tease me. But let's be honest… I win.</div>
-                <div class="card"><span style="font-size: 1.4rem; margin-right: 0.5rem;">🤫</span> You understand me. Without explanations. Without effort.</div>
+            <div class="content">
+                <h2>Why I Like You, Mechi 💕</h2>
+                <div class="card-grid">
+                    <div class="card"><span style="font-size: 1.4rem; margin-right: 0.5rem;">💗</span> I like the way you look at me. Like I'm already yours.</div>
+                    <div class="card"><span style="font-size: 1.4rem; margin-right: 0.5rem;">💬</span> I like the way you yap. About nothing. About everything. And I'd still listen.</div>
+                    <div class="card"><span style="font-size: 1.4rem; margin-right: 0.5rem;">👀</span> I like your eyes. They don't just look at me. They stay.</div>
+                    <div class="card"><span style="font-size: 1.4rem; margin-right: 0.5rem;">✨</span> I like your confidence. The way you chose me first. Bold.</div>
+                    <div class="card"><span style="font-size: 1.4rem; margin-right: 0.5rem;">📝</span> You remember small details. Things I forget I said. But you don't.</div>
+                    <div class="card"><span style="font-size: 1.4rem; margin-right: 0.5rem;">🫠</span> You act tough. But you melt. And I love that I get to see that side.</div>
+                    <div class="card"><span style="font-size: 1.4rem; margin-right: 0.5rem;">😏</span> You try to tease me. But let's be honest… I win.</div>
+                    <div class="card"><span style="font-size: 1.4rem; margin-right: 0.5rem;">🤫</span> You understand me. Without explanations. Without effort.</div>
+                </div>
+                <div style="margin: 1.5rem 0; text-align: center;">
+                    <div class="card" style="background: #ffd9e2;"><strong>You don't just make me happy. You make me feel complete.</strong></div>
+                </div>
             </div>
-            <div style="margin: 1.5rem 0 0; text-align: center;">
-                <div class="card" style="background: #ffd9e2;"><strong>You don't just make me happy. You make me feel complete.</strong></div>
-            </div>
-            <div class="flex-center">
+            <div class="button-container">
                 <button class="button" onclick="scrollToSection(2)">So how did this happen?</button>
             </div>
         </section>
 
         <!-- SECTION 2: Our Story -->
         <section>
-            <h2>Our Story 📖</h2>
-            <div class="story-text">You saw me first.<br>Pink hoodie.<br>Attractive enough to text.</div>
-            <div class="story-text">You fell first.<br><strong>But I fell harder.</strong></div>
-            <div class="story-text">First impression?<br>Cute. Pretty. Dangerous.</div>
-            <div class="story-text">The moment I realised I liked you?<br><br>When you said…<br><span class="pause">"My boyfriend's name should be Aryan."</span></div>
-            <div class="pause" style="font-size: 1.4rem;">That was it. I was done.</div>
-            <div class="flex-center">
+            <div class="content">
+                <h2>Our Story 📖</h2>
+                <div class="story-text">You saw me first.<br>Pink hoodie.<br>Attractive enough to text.</div>
+                <div class="story-text">You fell first.<br><strong>But I fell harder.</strong></div>
+                <div class="story-text">First impression?<br>Cute. Pretty. Dangerous.</div>
+                <div class="story-text">The moment I realised I liked you?<br><br>When you said…<br><span class="pause">"My boyfriend's name should be Aryan."</span></div>
+                <div class="pause" style="font-size: 1.4rem;">That was it. I was done.</div>
+            </div>
+            <div class="button-container">
                 <button class="button" onclick="scrollToSection(3)">Now what?</button>
             </div>
         </section>
 
         <!-- SECTION 3: What You Became -->
         <section>
-            <h2>What You Became 🌅</h2>
-            <div class="card-grid">
-                <div class="card">You became my calm.</div>
-                <div class="card">When you talk to me… everything slows down.</div>
-                <div class="card">When you tease me too much… I pretend I'm annoyed. I'm not.</div>
-                <div class="card">When you show your emotions… I feel proud. Because you let me see you.</div>
-                <div class="card" style="background: #ffe0e8;">Your presence makes me feel at ease. And that's rare.</div>
+            <div class="content">
+                <h2>What You Became 🌅</h2>
+                <div class="card-grid">
+                    <div class="card">You became my calm.</div>
+                    <div class="card">When you talk to me… everything slows down.</div>
+                    <div class="card">When you tease me too much… I pretend I'm annoyed. I'm not.</div>
+                    <div class="card">When you show your emotions… I feel proud. Because you let me see you.</div>
+                    <div class="card" style="background: #ffe0e8;">Your presence makes me feel at ease. And that's rare.</div>
+                </div>
             </div>
-            <div class="flex-center">
+            <div class="button-container">
                 <button class="button" onclick="scrollToSection(4)">Future with you?</button>
             </div>
         </section>
 
         <!-- SECTION 4: Future With You -->
         <section>
-            <h2>Future With You 🌤️</h2>
-            <div class="card">Because I like how calm you are… I want peaceful comfort with you.</div>
-            <div class="card">Because you understand me without words… I want growth together. No forcing. Just becoming better — together.</div>
-            <div class="card">Because you tease me… I want a future where we never stop.</div>
-            <div class="card">I want more kisses and hugs with you. Fewer arguments without you. A life where holding each other always becomes normal.</div>
-            <div class="card" style="background: #ffd2dd; margin-top: 1rem;">No drama. No rush. Just us. Growing. Teasing. Staying.</div>
-            <div class="flex-center">
+            <div class="content">
+                <h2>Future With You 🌤️</h2>
+                <div class="card-grid">
+                    <div class="card">Because I like how calm you are… I want peaceful comfort with you.</div>
+                    <div class="card">Because you understand me without words… I want growth together. No forcing. Just becoming better — together.</div>
+                    <div class="card">Because you tease me… I want a future where we never stop.</div>
+                    <div class="card">I want more kisses and hugs with you. Fewer arguments without you. A life where holding each other always becomes normal.</div>
+                    <div class="card" style="background: #ffd2dd; margin-top: 1rem;">No drama. No rush. Just us. Growing. Teasing. Staying.</div>
+                </div>
+            </div>
+            <div class="button-container">
                 <button class="button" onclick="scrollToSection(5)">There's more.</button>
             </div>
         </section>
 
         <!-- SECTION 5: SECRET PAGE (Password Protected) -->
         <section id="secret-section">
-            <h2>🔒 Secret Page</h2>
-            <div class="password-box">
-                <div class="hint">Hint: The color of the hoodie that started it.</div>
-                <input type="text" id="passwordInput" placeholder="Type here..." autocomplete="off" inputmode="text">
-                <div class="flex-center">
-                    <button class="button password-button" onclick="checkPassword()">Unlock 🔓</button>
-                </div>
-                
-                <div id="secretContent" class="secret-content">
-                    <div style="margin-top: 2rem; text-align: left;">
-                        <p style="font-size: 1.3rem; margin-bottom: 1rem;">You don't even realise what you do to me sometimes.</p>
-                        <p class="card">The way you look at me… like you know exactly what you're doing.</p>
-                        <p class="card">The way you soften when it's just us.</p>
-                        <p class="card">The way your voice changes.</p>
-                        <p class="card">I don't just want your attention. I want your closeness.</p>
-                        <p class="card">Your hands. Your warmth. Your quiet moments.</p>
-                        <p style="font-size: 1.2rem; margin-top: 1.5rem; background: #ffd2dd; padding: 1rem; border-radius: 1.5rem;">And I promise… I'll make every hug mean something.</p>
+            <div class="content">
+                <h2>🔒 Secret Page</h2>
+                <div class="password-box">
+                    <div class="hint">Hint: The color of the hoodie that started it.</div>
+                    <input type="text" id="passwordInput" placeholder="Type here..." autocomplete="off" inputmode="text">
+                    <div style="display: flex; justify-content: center;">
+                        <button class="button password-button" onclick="checkPassword()">Unlock 🔓</button>
                     </div>
+                    
+                    <div id="secretContent" class="secret-content">
+                        <div style="margin-top: 2rem; text-align: left;">
+                            <p style="font-size: 1.3rem; margin-bottom: 1rem;">You don't even realise what you do to me sometimes.</p>
+                            <p class="card">The way you look at me… like you know exactly what you're doing.</p>
+                            <p class="card">The way you soften when it's just us.</p>
+                            <p class="card">The way your voice changes.</p>
+                            <p class="card">I don't just want your attention. I want your closeness.</p>
+                            <p class="card">Your hands. Your warmth. Your quiet moments.</p>
+                            <p style="font-size: 1.2rem; margin-top: 1.5rem; background: #ffd2dd; padding: 1rem; border-radius: 1.5rem;">And I promise… I'll make every hug mean something.</p>
+                        </div>
+                    </div>
+                    <div id="wrongPassword" style="color: #b84c6c; margin-top: 1rem; display: none;">Try again, baby 💕 (hint: it's pink)</div>
                 </div>
-                <div id="wrongPassword" style="color: #b84c6c; margin-top: 1rem; display: none;">Try again, baby 💕 (hint: it's pink)</div>
             </div>
-            <div class="flex-center" style="margin-top: 1rem;">
+            <div class="button-container">
                 <button class="button" onclick="scrollToSection(6)">Continue →</button>
             </div>
         </section>
 
         <!-- SECTION 6: FINAL PAGE -->
         <section class="final">
-            <h1>🔥</h1>
-            <div class="story-text" style="font-size: 1.8rem;">You chose me first.</div>
-            <div class="story-text" style="font-size: 1.8rem;">You fell first.</div>
-            <div class="mine-text">I fell harder.</div>
-            <div class="pause" style="font-size: 2rem; margin: 2rem 0;">And now?</div>
-            <div style="font-size: 2.2rem; color: #a13d5f; margin: 1rem 0;">I'm not going anywhere.</div>
-            <div class="flex-center">
+            <div class="content">
+                <h1>🔥</h1>
+                <div class="story-text" style="font-size: 1.8rem;">You chose me first.</div>
+                <div class="story-text" style="font-size: 1.8rem;">You fell first.</div>
+                <div class="mine-text">I fell harder.</div>
+                <div class="pause" style="font-size: 2rem; margin: 2rem 0;">And now?</div>
+                <div style="font-size: 2.2rem; color: #a13d5f; margin: 1rem 0;">I'm not going anywhere.</div>
+            </div>
+            <div class="button-container">
                 <button class="button" style="font-size: 1.3rem; padding: 1.2rem 2.5rem;" onclick="showFinalMessage()">Too late now.</button>
             </div>
-            <div id="finalMessage" style="display: none; margin-top: 2rem; font-size: 2rem; color: #a13d5f; font-weight: 600;">You're mine, Mechi. And I'm staying. 💗</div>
+            <div id="finalMessage" style="display: none; margin-top: 2rem; font-size: 2rem; color: #a13d5f; font-weight: 600; text-align: center;">You're mine, Mechi. And I'm staying. 💗</div>
         </section>
     </div>
 
     <script>
-        // FIXED: Scroll to specific section function
+        // Scroll to specific section function
         function scrollToSection(index) {
             const sections = document.getElementById('sections');
             const height = window.innerHeight;
@@ -373,7 +395,7 @@
             });
         }
 
-        // FIXED: Password protection function
+        // Password protection function
         function checkPassword() {
             const password = document.getElementById('passwordInput').value.toLowerCase().trim();
             const secretContent = document.getElementById('secretContent');
@@ -397,7 +419,7 @@
             }
         }
 
-        // FIXED: Enter key in password field
+        // Enter key in password field
         document.addEventListener('DOMContentLoaded', function() {
             const passwordInput = document.getElementById('passwordInput');
             if (passwordInput) {
