@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>For Mechi 💗</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: #fef4f4;
+            color: #2d1b1b;
+            line-height: 1.5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Mobile-first scrolling */
+        .sections {
+            scroll-snap-type: y mandatory;
+            overflow-y: scroll;
+            height: 100vh;
+            scroll-behavior: smooth;
+        }
+
+        section {
+            scroll-snap-align: start;
+            min-height: 100vh;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            background: linear-gradient(145deg, #fff9f9 0%, #ffe9f0 100%);
+            border-bottom: 1px solid rgba(255, 140, 170, 0.2);
+        }
+
+        /* Soft romantic aesthetic */
+        h1, h2 {
+            font-weight: 400;
+            letter-spacing: -0.02em;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            font-family: 'Georgia', serif;
+            color: #a13d5f;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: #b84c6c;
+            font-family: 'Georgia', serif;
+        }
+
+        .landing {
+            background: linear-gradient(135deg, #ffd9e2 0%, #ffecf0 100%);
+            text-align: center;
+        }
+
+        .landing p {
+            font-size: 1.2rem;
+            margin: 1rem 0;
+            color: #5a3e3e;
+        }
+
+        .quote {
+            font-size: 1.4rem;
+            font-style: italic;
+            color: #b84c6c;
+            background: rgba(255, 255, 255, 0.5);
+            padding: 1.5rem;
+            border-radius: 2rem;
+            margin: 1rem 0;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+        }
+
+        .button {
+            background: #b84c6c;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            border-radius: 3rem;
+            margin: 1.5rem auto 0;
+            display: inline-block;
+            text-decoration: none;
+            font-weight: 500;
+            box-shadow: 0 4px 15px rgba(184, 76, 108, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            width: fit-content;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .button:active {
+            transform: scale(0.96);
+            background: #9f3f5c;
+        }
+
+        /* Card grid for reasons */
+        .card-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            margin: 1rem 0;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            padding: 1.2rem;
+            border-radius: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
+            font-size: 1.1rem;
+            color: #3d2a2a;
+            transition: transform 0.2s;
+        }
+
+        .card:active {
+            transform: translateX(4px);
+            background: rgba(255, 240, 245, 0.9);
+        }
+
+        .card-emoji {
+            font-size: 1.4rem;
+            margin-right: 0.5rem;
+        }
+
+        .story-text {
+            font-size: 1.3rem;
+            margin: 1.2rem 0;
+            padding-left: 0.5rem;
+            border-left: 4px solid #ffa5b9;
+        }
+
+        .pause {
+            animation: pulse 2s infinite;
+            font-size: 1.8rem;
+            margin: 1rem 0;
+            color: #b84c6c;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.6; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.05); }
+            100% { opacity: 0.6; transform: scale(1); }
+        }
+
+        /* Password section */
+        .password-box {
+            background: white;
+            padding: 2rem 1.5rem;
+            border-radius: 2rem;
+            box-shadow: 0 10px 30px rgba(184, 76, 108, 0.1);
+            text-align: center;
+        }
+
+        .hint {
+            color: #b84c6c;
+            font-style: italic;
+            margin: 1rem 0;
+            font-size: 1.1rem;
+        }
+
+        input {
+            width: 100%;
+            padding: 1rem;
+            font-size: 1.1rem;
+            border: 2px solid #ffd0da;
+            border-radius: 2rem;
+            margin: 1rem 0;
+            background: #fff9fb;
+            text-align: center;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #b84c6c;
+        }
+
+        .secret-content {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+
+        .secret-content.show {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .final {
+            background: linear-gradient(145deg, #ffe3e8 0%, #ffd4de 100%);
+            text-align: center;
+        }
+
+        .final h1 {
+            font-size: 2.5rem;
+            margin: 1rem 0;
+        }
+
+        .mine-text {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #a13d5f;
+            margin: 2rem 0;
+        }
+
+        /* Navigation dots (optional but cute) */
+        .nav-dots {
+            position: fixed;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 100;
+        }
+
+        .nav-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(184, 76, 108, 0.3);
+            transition: all 0.2s;
+        }
+
+        .nav-dot.active {
+            background: #b84c6c;
+            transform: scale(1.3);
+        }
+
+        /* Touch-friendly spacing */
+        .spacer {
+            height: 10px;
+        }
+
+        .small-text {
+            font-size: 0.9rem;
+            color: #7a5a5a;
+        }
+
+        /* Mechi's name special styling */
+        .mechi-name {
+            font-weight: 600;
+            color: #b84c6c;
+            background: rgba(255, 215, 225, 0.5);
+            padding: 0.2rem 0.5rem;
+            border-radius: 1rem;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <div class="sections" id="sections">
+        <!-- LANDING PAGE -->
+        <section class="landing">
+            <h1>🌸 For Mechi</h1>
+            <div class="quote">
+                "She Fell First.<br>I Fell Harder."
+            </div>
+            <p style="margin-top: 2rem;">You saw me in a pink hoodie.<br>Decided I looked good.<br>Texted me.</p>
+            <p>And somehow…<br>I'm the one who fell harder.</p>
+            <a class="button" onclick="document.getElementById('sections').scrollTo({top: window.innerHeight, behavior: 'smooth'})">Continue, trouble.</a>
+            <div style="margin-top: 2rem; opacity: 0.5;">💗</div>
+        </section>
+
+        <!-- SECTION 1: Why I Like You -->
+        <section>
+            <h2>Why I Like You, Mechi 💕</h2>
+            <div class="card-grid">
+                <div class="card"><span class="card-emoji">💗</span> I like the way you look at me. Like I'm already yours.</div>
+                <div class="card"><span class="card-emoji">💬</span> I like the way you yap. About nothing. About everything. And I'd still listen.</div>
+                <div class="card"><span class="card-emoji">👀</span> I like your eyes. They don't just look at me. They stay.</div>
+                <div class="card"><span class="card-emoji">✨</span> I like your confidence. The way you chose me first. Bold.</div>
+                <div class="card"><span class="card-emoji">📝</span> You remember small details. Things I forget I said. But you don't.</div>
+                <div class="card"><span class="card-emoji">🫠</span> You act tough. But you melt. And I love that I get to see that side.</div>
+                <div class="card"><span class="card-emoji">😏</span> You try to tease me. But let's be honest… I win.</div>
+                <div class="card"><span class="card-emoji">🤫</span> You understand me. Without explanations. Without effort.</div>
+            </div>
+            <div style="margin: 1.5rem 0 0; text-align: center;">
+                <div class="card" style="background: #ffd9e2;"><strong>You don't just make me happy. You make me feel complete.</strong></div>
+            </div>
+            <a class="button" onclick="document.getElementById('sections').scrollTo({top: window.innerHeight*2, behavior: 'smooth'})">So how did this happen?</a>
+        </section>
+
+        <!-- SECTION 2: Our Story -->
+        <section>
+            <h2>Our Story 📖</h2>
+            <div class="story-text">You saw me first.<br>Pink hoodie.<br>Attractive enough to text.</div>
+            <div class="story-text">You fell first.<br><strong>But I fell harder.</strong></div>
+            <div class="story-text">First impression?<br>Cute. Pretty. Dangerous.</div>
+            <div class="story-text">The moment I realised I liked you?<br><br>When you said…<br><span class="pause">"My boyfriend's name should be Aryan."</span></div>
+            <div class="pause" style="font-size: 1.4rem;">That was it. I was done.</div>
+            <a class="button" onclick="document.getElementById('sections').scrollTo({top: window.innerHeight*3, behavior: 'smooth'})">Now what?</a>
+        </section>
+
+        <!-- SECTION 3: What You Became -->
+        <section>
+            <h2>What You Became 🌅</h2>
+            <div class="card-grid">
+                <div class="card">You became my calm.</div>
+                <div class="card">When you talk to me… everything slows down.</div>
+                <div class="card">When you tease me too much… I pretend I'm annoyed. I'm not.</div>
+                <div class="card">When you show your emotions… I feel proud. Because you let me see you.</div>
+                <div class="card" style="background: #ffe0e8;">Your presence makes me feel at ease. And that's rare.</div>
+            </div>
+            <a class="button" onclick="document.getElementById('sections').scrollTo({top: window.innerHeight*4, behavior: 'smooth'})">Future with you?</a>
+        </section>
+
+        <!-- SECTION 4: Future With You -->
+        <section>
+            <h2>Future With You 🌤️</h2>
+            <div class="card">Because I like how calm you are… I want peaceful comfort with you.</div>
+            <div class="card">Because you understand me without words… I want growth together. No forcing. Just becoming better — together.</div>
+            <div class="card">Because you tease me… I want a future where we never stop.</div>
+            <div class="card">I want more kisses and hugs with you. Fewer arguments without you. A life where holding each other always becomes normal.</div>
+            <div class="card" style="background: #ffd2dd; margin-top: 1rem;">No drama. No rush. Just us. Growing. Teasing. Staying.</div>
+            <a class="button" onclick="document.getElementById('sections').scrollTo({top: window.innerHeight*5, behavior: 'smooth'})">There's more.</a>
+        </section>
+
+        <!-- SECRET PAGE (Password Protected) -->
+        <section id="secret-section">
+            <h2>🔒 Secret Page</h2>
+            <div class="password-box">
+                <div class="hint">Hint: The color of the hoodie that started it.</div>
+                <input type="text" id="passwordInput" placeholder="Enter color..." autocomplete="off">
+                <button class="button" onclick="checkPassword()" style="margin-top: 0.5rem;">Unlock</button>
+                
+                <div id="secretContent" class="secret-content">
+                    <div style="margin-top: 2rem; text-align: left;">
+                        <p style="font-size: 1.3rem; margin-bottom: 1rem;">You don't even realise what you do to me sometimes.</p>
+                        <p class="card">The way you look at me… like you know exactly what you're doing.</p>
+                        <p class="card">The way you soften when it's just us.</p>
+                        <p class="card">The way your voice changes.</p>
+                        <p class="card">I don't just want your attention. I want your closeness.</p>
+                        <p class="card">Your hands. Your warmth. Your quiet moments.</p>
+                        <p style="font-size: 1.2rem; margin-top: 1.5rem; background: #ffd2dd; padding: 1rem; border-radius: 1.5rem;">And I promise… I'll make every hug mean something.</p>
+                    </div>
+                </div>
+                <div id="wrongPassword" style="color: #b84c6c; margin-top: 1rem; display: none;">Try again, baby 💕</div>
+            </div>
+            <a class="button" onclick="document.getElementById('sections').scrollTo({top: window.innerHeight*6, behavior: 'smooth'})" style="margin-top: 1rem;">Continue →</a>
+        </section>
+
+        <!-- FINAL PAGE -->
+        <section class="final">
+            <h1>🔥</h1>
+            <div class="story-text" style="font-size: 1.8rem;">You chose me first.</div>
+            <div class="story-text" style="font-size: 1.8rem;">You fell first.</div>
+            <div class="mine-text">I fell harder.</div>
+            <div class="pause" style="font-size: 2rem; margin: 2rem 0;">And now?</div>
+            <div style="font-size: 2.2rem; color: #a13d5f; margin: 1rem 0;">I'm not going anywhere.</div>
+            <a class="button" onclick="showFinalMessage()" style="font-size: 1.3rem; padding: 1.2rem 2.5rem;">Too late now.</a>
+            <div id="finalMessage" style="display: none; margin-top: 2rem; font-size: 2rem; color: #a13d5f; font-weight: 600;">You're mine, Mechi. And I'm staying. 💗</div>
+        </section>
+    </div>
+
+    <!-- Simple navigation dots (optional) -->
+    <div class="nav-dots">
+        <div class="nav-dot" onclick="document.getElementById('sections').scrollTo({top: 0, behavior: 'smooth'})"></div>
+        <div class="nav-dot" onclick="document.getElementById('sections').scrollTo({top: window.innerHeight, behavior: 'smooth'})"></div>
+        <div class="nav-dot" onclick="document.getElementById('sections').scrollTo({top: window.innerHeight*2, behavior: 'smooth'})"></div>
+        <div class="nav-dot" onclick="document.getElementById('sections').scrollTo({top: window.innerHeight*3, behavior: 'smooth'})"></div>
+        <div class="nav-dot" onclick="document.getElementById('sections').scrollTo({top: window.innerHeight*4, behavior: 'smooth'})"></div>
+        <div class="nav-dot" onclick="document.getElementById('sections').scrollTo({top: window.innerHeight*5, behavior: 'smooth'})"></div>
+        <div class="nav-dot" onclick="document.getElementById('sections').scrollTo({top: window.innerHeight*6, behavior: 'smooth'})"></div>
+    </div>
+
+    <script>
+        // Update active navigation dot
+        const sections = document.getElementById('sections');
+        const dots = document.querySelectorAll('.nav-dot');
+        
+        sections.addEventListener('scroll', function() {
+            const scrollPosition = sections.scrollTop;
+            const windowHeight = window.innerHeight;
+            const activeIndex = Math.round(scrollPosition / windowHeight);
+            
+            dots.forEach((dot, index) => {
+                if (index === activeIndex) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+        });
+
+        // Password protection
+        function checkPassword() {
+            const password = document.getElementById('passwordInput').value.toLowerCase().trim();
+            if (password === 'pink') {
+                document.getElementById('secretContent').classList.add('show');
+                document.getElementById('wrongPassword').style.display = 'none';
+            } else {
+                document.getElementById('wrongPassword').style.display = 'block';
+                document.getElementById('secretContent').classList.remove('show');
+            }
+        }
+
+        // Allow Enter key in password field
+        document.getElementById('passwordInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkPassword();
+            }
+        });
+
+        function showFinalMessage() {
+            document.getElementById('finalMessage').style.display = 'block';
+        }
+
+        // Touch-friendly: enable button clicks
+        // Prevents double-tap zoom on buttons
+        document.querySelectorAll('.button').forEach(btn => {
+            btn.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+            }, { passive: false });
+        });
+
+        // Set initial active dot
+        setTimeout(() => {
+            dots[0].classList.add('active');
+        }, 100);
+    </script>
+</body>
+</html>
