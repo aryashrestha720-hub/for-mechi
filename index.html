@@ -9,6 +9,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent; /* Removes grey tap highlight on Android */
         }
 
         body {
@@ -17,8 +18,6 @@
             color: #2d1b1b;
             line-height: 1.5;
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
         }
 
         /* Mobile-first scrolling */
@@ -27,6 +26,7 @@
             overflow-y: scroll;
             height: 100vh;
             scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS/Android */
         }
 
         section {
@@ -41,7 +41,6 @@
             border-bottom: 1px solid rgba(255, 140, 170, 0.2);
         }
 
-        /* Soft romantic aesthetic */
         h1, h2 {
             font-weight: 400;
             letter-spacing: -0.02em;
@@ -101,7 +100,11 @@
             width: fit-content;
             cursor: pointer;
             transition: all 0.2s ease;
-            -webkit-tap-highlight-color: transparent;
+            min-height: 48px; /* Better touch target */
+            min-width: 48px; /* Better touch target */
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .button:active {
@@ -127,16 +130,12 @@
             font-size: 1.1rem;
             color: #3d2a2a;
             transition: transform 0.2s;
+            min-height: 60px; /* Better touch target */
         }
 
         .card:active {
             transform: translateX(4px);
             background: rgba(255, 240, 245, 0.9);
-        }
-
-        .card-emoji {
-            font-size: 1.4rem;
-            margin-right: 0.5rem;
         }
 
         .story-text {
@@ -159,13 +158,14 @@
             100% { opacity: 0.6; transform: scale(1); }
         }
 
-        /* Password section */
+        /* Password section - FIXED for mobile */
         .password-box {
             background: white;
             padding: 2rem 1.5rem;
             border-radius: 2rem;
             box-shadow: 0 10px 30px rgba(184, 76, 108, 0.1);
             text-align: center;
+            width: 100%;
         }
 
         .hint {
@@ -184,6 +184,7 @@
             margin: 1rem 0;
             background: #fff9fb;
             text-align: center;
+            min-height: 50px; /* Better touch target */
         }
 
         input:focus {
@@ -194,6 +195,7 @@
         .secret-content {
             display: none;
             animation: fadeIn 0.5s;
+            margin-top: 2rem;
         }
 
         .secret-content.show {
@@ -222,42 +224,15 @@
             margin: 2rem 0;
         }
 
-        /* Navigation dots (optional but cute) */
-        .nav-dots {
-            position: fixed;
-            right: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            z-index: 100;
-        }
+        /* REMOVED navigation dots - they were too small for mobile */
+        /* Instead, we'll rely on the buttons for navigation */
 
-        .nav-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: rgba(184, 76, 108, 0.3);
-            transition: all 0.2s;
-        }
-
-        .nav-dot.active {
-            background: #b84c6c;
-            transform: scale(1.3);
-        }
-
-        /* Touch-friendly spacing */
+        /* Better touch spacing */
         .spacer {
-            height: 10px;
+            height: 15px;
         }
 
-        .small-text {
-            font-size: 0.9rem;
-            color: #7a5a5a;
-        }
-
-        /* Mechi's name special styling */
+        /* Fix for Android */
         .mechi-name {
             font-weight: 600;
             color: #b84c6c;
@@ -265,6 +240,25 @@
             padding: 0.2rem 0.5rem;
             border-radius: 1rem;
             display: inline-block;
+        }
+
+        /* Mobile-friendly password buttons */
+        .password-button {
+            background: #b84c6c;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            border-radius: 3rem;
+            margin: 0.5rem auto;
+            width: 100%;
+            max-width: 200px;
+            min-height: 50px;
+        }
+
+        .flex-center {
+            display: flex;
+            justify-content: center;
         }
     </style>
 </head>
@@ -278,7 +272,9 @@
             </div>
             <p style="margin-top: 2rem;">You saw me in a pink hoodie.<br>Decided I looked good.<br>Texted me.</p>
             <p>And somehow…<br>I'm the one who fell harder.</p>
-            <a class="button" onclick="document.getElementById('sections').scrollTo({top: window.innerHeight, behavior: 'smooth'})">Continue, trouble.</a>
+            <div class="flex-center">
+                <button class="button" onclick="scrollToSection(1)">Continue, trouble.</button>
+            </div>
             <div style="margin-top: 2rem; opacity: 0.5;">💗</div>
         </section>
 
@@ -286,19 +282,21 @@
         <section>
             <h2>Why I Like You, Mechi 💕</h2>
             <div class="card-grid">
-                <div class="card"><span class="card-emoji">💗</span> I like the way you look at me. Like I'm already yours.</div>
-                <div class="card"><span class="card-emoji">💬</span> I like the way you yap. About nothing. About everything. And I'd still listen.</div>
-                <div class="card"><span class="card-emoji">👀</span> I like your eyes. They don't just look at me. They stay.</div>
-                <div class="card"><span class="card-emoji">✨</span> I like your confidence. The way you chose me first. Bold.</div>
-                <div class="card"><span class="card-emoji">📝</span> You remember small details. Things I forget I said. But you don't.</div>
-                <div class="card"><span class="card-emoji">🫠</span> You act tough. But you melt. And I love that I get to see that side.</div>
-                <div class="card"><span class="card-emoji">😏</span> You try to tease me. But let's be honest… I win.</div>
-                <div class="card"><span class="card-emoji">🤫</span> You understand me. Without explanations. Without effort.</div>
+                <div class="card"><span style="font-size: 1.4rem; margin-right: 0.5rem;">💗</span> I like the way you look at me. Like I'm already yours.</div>
+                <div class="card"><span style="font-size: 1.4rem; margin-right: 0.5rem;">💬</span> I like the way you yap. About nothing. About everything. And I'd still listen.</div>
+                <div class="card"><span style="font-size: 1.4rem; margin-right: 0.5rem;">👀</span> I like your eyes. They don't just look at me. They stay.</div>
+                <div class="card"><span style="font-size: 1.4rem; margin-right: 0.5rem;">✨</span> I like your confidence. The way you chose me first. Bold.</div>
+                <div class="card"><span style="font-size: 1.4rem; margin-right: 0.5rem;">📝</span> You remember small details. Things I forget I said. But you don't.</div>
+                <div class="card"><span style="font-size: 1.4rem; margin-right: 0.5rem;">🫠</span> You act tough. But you melt. And I love that I get to see that side.</div>
+                <div class="card"><span style="font-size: 1.4rem; margin-right: 0.5rem;">😏</span> You try to tease me. But let's be honest… I win.</div>
+                <div class="card"><span style="font-size: 1.4rem; margin-right: 0.5rem;">🤫</span> You understand me. Without explanations. Without effort.</div>
             </div>
             <div style="margin: 1.5rem 0 0; text-align: center;">
                 <div class="card" style="background: #ffd9e2;"><strong>You don't just make me happy. You make me feel complete.</strong></div>
             </div>
-            <a class="button" onclick="document.getElementById('sections').scrollTo({top: window.innerHeight*2, behavior: 'smooth'})">So how did this happen?</a>
+            <div class="flex-center">
+                <button class="button" onclick="scrollToSection(2)">So how did this happen?</button>
+            </div>
         </section>
 
         <!-- SECTION 2: Our Story -->
@@ -309,7 +307,9 @@
             <div class="story-text">First impression?<br>Cute. Pretty. Dangerous.</div>
             <div class="story-text">The moment I realised I liked you?<br><br>When you said…<br><span class="pause">"My boyfriend's name should be Aryan."</span></div>
             <div class="pause" style="font-size: 1.4rem;">That was it. I was done.</div>
-            <a class="button" onclick="document.getElementById('sections').scrollTo({top: window.innerHeight*3, behavior: 'smooth'})">Now what?</a>
+            <div class="flex-center">
+                <button class="button" onclick="scrollToSection(3)">Now what?</button>
+            </div>
         </section>
 
         <!-- SECTION 3: What You Became -->
@@ -322,7 +322,9 @@
                 <div class="card">When you show your emotions… I feel proud. Because you let me see you.</div>
                 <div class="card" style="background: #ffe0e8;">Your presence makes me feel at ease. And that's rare.</div>
             </div>
-            <a class="button" onclick="document.getElementById('sections').scrollTo({top: window.innerHeight*4, behavior: 'smooth'})">Future with you?</a>
+            <div class="flex-center">
+                <button class="button" onclick="scrollToSection(4)">Future with you?</button>
+            </div>
         </section>
 
         <!-- SECTION 4: Future With You -->
@@ -333,16 +335,20 @@
             <div class="card">Because you tease me… I want a future where we never stop.</div>
             <div class="card">I want more kisses and hugs with you. Fewer arguments without you. A life where holding each other always becomes normal.</div>
             <div class="card" style="background: #ffd2dd; margin-top: 1rem;">No drama. No rush. Just us. Growing. Teasing. Staying.</div>
-            <a class="button" onclick="document.getElementById('sections').scrollTo({top: window.innerHeight*5, behavior: 'smooth'})">There's more.</a>
+            <div class="flex-center">
+                <button class="button" onclick="scrollToSection(5)">There's more.</button>
+            </div>
         </section>
 
-        <!-- SECRET PAGE (Password Protected) -->
+        <!-- SECRET PAGE (Password Protected) - FIXED VERSION -->
         <section id="secret-section">
             <h2>🔒 Secret Page</h2>
             <div class="password-box">
                 <div class="hint">Hint: The color of the hoodie that started it.</div>
-                <input type="text" id="passwordInput" placeholder="Enter color..." autocomplete="off">
-                <button class="button" onclick="checkPassword()" style="margin-top: 0.5rem;">Unlock</button>
+                <input type="text" id="passwordInput" placeholder="Type here..." autocomplete="off" inputmode="text">
+                <div class="flex-center">
+                    <button class="button password-button" onclick="checkPassword()">Unlock 🔓</button>
+                </div>
                 
                 <div id="secretContent" class="secret-content">
                     <div style="margin-top: 2rem; text-align: left;">
@@ -355,9 +361,11 @@
                         <p style="font-size: 1.2rem; margin-top: 1.5rem; background: #ffd2dd; padding: 1rem; border-radius: 1.5rem;">And I promise… I'll make every hug mean something.</p>
                     </div>
                 </div>
-                <div id="wrongPassword" style="color: #b84c6c; margin-top: 1rem; display: none;">Try again, baby 💕</div>
+                <div id="wrongPassword" style="color: #b84c6c; margin-top: 1rem; display: none;">Try again, baby 💕 (hint: it's pink)</div>
             </div>
-            <a class="button" onclick="document.getElementById('sections').scrollTo({top: window.innerHeight*6, behavior: 'smooth'})" style="margin-top: 1rem;">Continue →</a>
+            <div class="flex-center" style="margin-top: 1rem;">
+                <button class="button" onclick="scrollToSection(6)">Continue →</button>
+            </div>
         </section>
 
         <!-- FINAL PAGE -->
@@ -368,50 +376,45 @@
             <div class="mine-text">I fell harder.</div>
             <div class="pause" style="font-size: 2rem; margin: 2rem 0;">And now?</div>
             <div style="font-size: 2.2rem; color: #a13d5f; margin: 1rem 0;">I'm not going anywhere.</div>
-            <a class="button" onclick="showFinalMessage()" style="font-size: 1.3rem; padding: 1.2rem 2.5rem;">Too late now.</a>
+            <div class="flex-center">
+                <button class="button" style="font-size: 1.3rem; padding: 1.2rem 2.5rem;" onclick="showFinalMessage()">Too late now.</button>
+            </div>
             <div id="finalMessage" style="display: none; margin-top: 2rem; font-size: 2rem; color: #a13d5f; font-weight: 600;">You're mine, Mechi. And I'm staying. 💗</div>
         </section>
     </div>
 
-    <!-- Simple navigation dots (optional) -->
-    <div class="nav-dots">
-        <div class="nav-dot" onclick="document.getElementById('sections').scrollTo({top: 0, behavior: 'smooth'})"></div>
-        <div class="nav-dot" onclick="document.getElementById('sections').scrollTo({top: window.innerHeight, behavior: 'smooth'})"></div>
-        <div class="nav-dot" onclick="document.getElementById('sections').scrollTo({top: window.innerHeight*2, behavior: 'smooth'})"></div>
-        <div class="nav-dot" onclick="document.getElementById('sections').scrollTo({top: window.innerHeight*3, behavior: 'smooth'})"></div>
-        <div class="nav-dot" onclick="document.getElementById('sections').scrollTo({top: window.innerHeight*4, behavior: 'smooth'})"></div>
-        <div class="nav-dot" onclick="document.getElementById('sections').scrollTo({top: window.innerHeight*5, behavior: 'smooth'})"></div>
-        <div class="nav-dot" onclick="document.getElementById('sections').scrollTo({top: window.innerHeight*6, behavior: 'smooth'})"></div>
-    </div>
-
     <script>
-        // Update active navigation dot
-        const sections = document.getElementById('sections');
-        const dots = document.querySelectorAll('.nav-dot');
-        
-        sections.addEventListener('scroll', function() {
-            const scrollPosition = sections.scrollTop;
-            const windowHeight = window.innerHeight;
-            const activeIndex = Math.round(scrollPosition / windowHeight);
-            
-            dots.forEach((dot, index) => {
-                if (index === activeIndex) {
-                    dot.classList.add('active');
-                } else {
-                    dot.classList.remove('active');
-                }
+        // Scroll to specific section (0-indexed)
+        function scrollToSection(index) {
+            const sections = document.getElementById('sections');
+            const height = window.innerHeight;
+            sections.scrollTo({
+                top: height * index,
+                behavior: 'smooth'
             });
-        });
+        }
 
-        // Password protection
+        // FIXED Password protection - case insensitive, trims spaces
         function checkPassword() {
             const password = document.getElementById('passwordInput').value.toLowerCase().trim();
+            const secretContent = document.getElementById('secretContent');
+            const wrongMsg = document.getElementById('wrongPassword');
+            
             if (password === 'pink') {
-                document.getElementById('secretContent').classList.add('show');
-                document.getElementById('wrongPassword').style.display = 'none';
+                secretContent.classList.add('show');
+                wrongMsg.style.display = 'none';
+                // Optional: Hide input after success
+                document.getElementById('passwordInput').style.display = 'none';
+                document.querySelector('.password-button').style.display = 'none';
+                document.querySelector('.hint').innerHTML = '✅ Unlocked!';
             } else {
-                document.getElementById('wrongPassword').style.display = 'block';
-                document.getElementById('secretContent').classList.remove('show');
+                wrongMsg.style.display = 'block';
+                secretContent.classList.remove('show');
+                // Shake animation for wrong password
+                document.getElementById('passwordInput').style.transform = 'shake 0.3s';
+                setTimeout(() => {
+                    document.getElementById('passwordInput').style.transform = 'none';
+                }, 300);
             }
         }
 
@@ -426,18 +429,16 @@
             document.getElementById('finalMessage').style.display = 'block';
         }
 
-        // Touch-friendly: enable button clicks
-        // Prevents double-tap zoom on buttons
-        document.querySelectorAll('.button').forEach(btn => {
-            btn.addEventListener('touchstart', (e) => {
-                e.preventDefault();
-            }, { passive: false });
-        });
-
-        // Set initial active dot
-        setTimeout(() => {
-            dots[0].classList.add('active');
-        }, 100);
+        // Add shake animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes shake {
+                0%, 100% { transform: translateX(0); }
+                25% { transform: translateX(-5px); }
+                75% { transform: translateX(5px); }
+            }
+        `;
+        document.head.appendChild(style);
     </script>
 </body>
 </html>
