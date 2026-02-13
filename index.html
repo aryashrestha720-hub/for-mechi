@@ -9,7 +9,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent; /* Removes grey tap highlight on Android */
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
@@ -20,13 +20,12 @@
             min-height: 100vh;
         }
 
-        /* Mobile-first scrolling */
         .sections {
             scroll-snap-type: y mandatory;
             overflow-y: scroll;
             height: 100vh;
             scroll-behavior: smooth;
-            -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS/Android */
+            -webkit-overflow-scrolling: touch;
         }
 
         section {
@@ -100,8 +99,8 @@
             width: fit-content;
             cursor: pointer;
             transition: all 0.2s ease;
-            min-height: 48px; /* Better touch target */
-            min-width: 48px; /* Better touch target */
+            min-height: 48px;
+            min-width: 48px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -112,7 +111,6 @@
             background: #9f3f5c;
         }
 
-        /* Card grid for reasons */
         .card-grid {
             display: flex;
             flex-direction: column;
@@ -130,7 +128,7 @@
             font-size: 1.1rem;
             color: #3d2a2a;
             transition: transform 0.2s;
-            min-height: 60px; /* Better touch target */
+            min-height: 60px;
         }
 
         .card:active {
@@ -158,7 +156,6 @@
             100% { opacity: 0.6; transform: scale(1); }
         }
 
-        /* Password section - FIXED for mobile */
         .password-box {
             background: white;
             padding: 2rem 1.5rem;
@@ -184,7 +181,7 @@
             margin: 1rem 0;
             background: #fff9fb;
             text-align: center;
-            min-height: 50px; /* Better touch target */
+            min-height: 50px;
         }
 
         input:focus {
@@ -224,25 +221,12 @@
             margin: 2rem 0;
         }
 
-        /* REMOVED navigation dots - they were too small for mobile */
-        /* Instead, we'll rely on the buttons for navigation */
-
-        /* Better touch spacing */
-        .spacer {
-            height: 15px;
+        .flex-center {
+            display: flex;
+            justify-content: center;
+            width: 100%;
         }
 
-        /* Fix for Android */
-        .mechi-name {
-            font-weight: 600;
-            color: #b84c6c;
-            background: rgba(255, 215, 225, 0.5);
-            padding: 0.2rem 0.5rem;
-            border-radius: 1rem;
-            display: inline-block;
-        }
-
-        /* Mobile-friendly password buttons */
         .password-button {
             background: #b84c6c;
             color: white;
@@ -255,16 +239,11 @@
             max-width: 200px;
             min-height: 50px;
         }
-
-        .flex-center {
-            display: flex;
-            justify-content: center;
-        }
     </style>
 </head>
 <body>
     <div class="sections" id="sections">
-        <!-- LANDING PAGE -->
+        <!-- SECTION 0: LANDING PAGE -->
         <section class="landing">
             <h1>🌸 For Mechi</h1>
             <div class="quote">
@@ -340,7 +319,7 @@
             </div>
         </section>
 
-        <!-- SECRET PAGE (Password Protected) - FIXED VERSION -->
+        <!-- SECTION 5: SECRET PAGE (Password Protected) -->
         <section id="secret-section">
             <h2>🔒 Secret Page</h2>
             <div class="password-box">
@@ -368,7 +347,7 @@
             </div>
         </section>
 
-        <!-- FINAL PAGE -->
+        <!-- SECTION 6: FINAL PAGE -->
         <section class="final">
             <h1>🔥</h1>
             <div class="story-text" style="font-size: 1.8rem;">You chose me first.</div>
@@ -384,7 +363,7 @@
     </div>
 
     <script>
-        // Scroll to specific section (0-indexed)
+        // FIXED: Scroll to specific section function
         function scrollToSection(index) {
             const sections = document.getElementById('sections');
             const height = window.innerHeight;
@@ -394,7 +373,7 @@
             });
         }
 
-        // FIXED Password protection - case insensitive, trims spaces
+        // FIXED: Password protection function
         function checkPassword() {
             const password = document.getElementById('passwordInput').value.toLowerCase().trim();
             const secretContent = document.getElementById('secretContent');
@@ -403,7 +382,7 @@
             if (password === 'pink') {
                 secretContent.classList.add('show');
                 wrongMsg.style.display = 'none';
-                // Optional: Hide input after success
+                // Hide input after success
                 document.getElementById('passwordInput').style.display = 'none';
                 document.querySelector('.password-button').style.display = 'none';
                 document.querySelector('.hint').innerHTML = '✅ Unlocked!';
@@ -411,20 +390,26 @@
                 wrongMsg.style.display = 'block';
                 secretContent.classList.remove('show');
                 // Shake animation for wrong password
-                document.getElementById('passwordInput').style.transform = 'shake 0.3s';
+                document.getElementById('passwordInput').style.animation = 'shake 0.3s';
                 setTimeout(() => {
-                    document.getElementById('passwordInput').style.transform = 'none';
+                    document.getElementById('passwordInput').style.animation = '';
                 }, 300);
             }
         }
 
-        // Allow Enter key in password field
-        document.getElementById('passwordInput').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                checkPassword();
+        // FIXED: Enter key in password field
+        document.addEventListener('DOMContentLoaded', function() {
+            const passwordInput = document.getElementById('passwordInput');
+            if (passwordInput) {
+                passwordInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        checkPassword();
+                    }
+                });
             }
         });
 
+        // Show final message
         function showFinalMessage() {
             document.getElementById('finalMessage').style.display = 'block';
         }
